@@ -16,7 +16,9 @@
     <!-- Header -->
     <header class="bg-blue-200 text-white">
         <div class="container mx-auto flex items-center justify-between py-4 px-6">
-            <h1 class="text-5xl font-bold" style="  font-family: 'Kaushan Script', serif; font-weight: 800; font-style: normal;"> <span style="color: #cc7bbe;">Ni</span><span style="color: #88682c;">dhi</span></h1>
+            <a href="/" class="text-5xl font-bold" style="font-family: 'Kaushan Script', serif; font-weight: 800; font-style: normal;">
+                    <span style="color: #cc7bbe;">Ni</span><span style="color: #88682c;">dhi</span>
+            </a>
             <div class="flex items-center gap-4">
                 <input type="text" placeholder="Search products" class="border text-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">
                 <button class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Search</button>

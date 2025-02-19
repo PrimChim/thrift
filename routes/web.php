@@ -17,10 +17,11 @@ Route::post('/register', [RegisterController::class, 'register'])
 
 Route::get('/', [ProductController::class, 'welcome'])-> name('home');
 
-Route::resource('products', ProductController::class);
+Route::get('/product/{product}', [ProductController::class, 'show']);
 
 // Protect routes that require authentication
 Route::middleware(['auth'])->group(function () {
+    Route::resource('products', ProductController::class);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 

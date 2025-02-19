@@ -63,8 +63,16 @@ class ProductController extends Controller
      */
     public function show(Products $product)
     {
-        return view('products.show', compact('product'));
+        // Check if the request is from the admin panel (for example, assuming it starts with "admin/")
+        if (request()->is('products/*')) {
+            // This is an admin request, show the admin view
+            return view('products.show', compact('product'));  // Adjust this to the admin's view if needed
+        }
+
+        // Otherwise, it's from a user, show the user-specific view
+        return view('singleProduct', compact('product'));
     }
+
 
     /**
      * Show the form for editing the specified product.
