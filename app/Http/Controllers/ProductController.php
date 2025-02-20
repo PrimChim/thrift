@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -31,7 +33,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -39,24 +42,36 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'quantity' => 'required|integer|min:0',
-            'category_id' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        try {
+            // Validate the request
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'price' => 'required|numeric|min:0',
+                'quantity' => 'required|integer|min:0',
+                'category_id' => 'required|exists:categories,id', // Ensures category exists
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('products', 'public');
-            $validated['image_url'] = $path;
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('products', 'public');
+                $validated['image_url'] = $path;
+            }
+
+            // Create the product
+            Products::create($validated);
+
+            return redirect()->route('products.index')->with('success', 'Product added successfully!');
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            Log::error('Product Store Error: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return back()->withInput()->with('error', 'An error occurred while adding the product. Please try again.');
         }
-
-        Products::create($validated);
-
-        return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
+
 
     /**
      * Display the specified product.

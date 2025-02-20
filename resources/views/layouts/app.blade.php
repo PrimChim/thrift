@@ -17,7 +17,7 @@
     <header class="bg-blue-200 text-white">
         <div class="container mx-auto flex items-center justify-between py-4 px-6">
             <a href="/" class="text-5xl font-bold" style="font-family: 'Kaushan Script', serif; font-weight: 800; font-style: normal;">
-                    <span style="color: #cc7bbe;">Ni</span><span style="color: #88682c;">dhi</span>
+                <span style="color: #cc7bbe;">Ni</span><span style="color: #88682c;">dhi</span>
             </a>
             <div class="flex items-center gap-4">
                 <input type="text" placeholder="Search products" class="border text-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">
@@ -31,12 +31,11 @@
     <!-- Categories Section -->
     <section class="bg-white shadow">
         <div class="container mx-auto flex gap-6 py-4 px-6">
-            <a href="#" class="text-gray-700 hover:text-blue-500">Electronics</a>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Fashion</a>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Home & Living</a>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Sports</a>
-            <a href="#" class="text-gray-700 hover:text-blue-500">Books</a>
-            <a href="#" class="text-gray-700 hover:text-blue-500">More...</a>
+            @foreach($categories as $category)
+            <a href="{{ route('category.show', $category->id) }}" class="text-gray-700 hover:text-blue-500">
+                {{ $category->name }}
+            </a>
+            @endforeach
         </div>
     </section>
 

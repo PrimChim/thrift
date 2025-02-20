@@ -29,6 +29,7 @@
         <nav class="space-y-4">
             <a href="{{ route('dashboard') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">🏠 Dashboard</a>
             <a href="{{ route('products.index') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">📦 Inventory</a>
+            <a href="{{ route('categories.index') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">✅ Categories</a>
             <a href="#" class="block py-2 px-3 hover:bg-gray-700 rounded">👤 Profile</a>
         </nav>
     </aside>

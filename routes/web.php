@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -18,6 +19,9 @@ Route::post('/register', [RegisterController::class, 'register'])
 Route::get('/', [ProductController::class, 'welcome'])-> name('home');
 
 Route::get('/product/{product}', [ProductController::class, 'show']);
+
+Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
+Route::resource('categories', CategoryController::class);
 
 // Protect routes that require authentication
 Route::middleware(['auth'])->group(function () {
