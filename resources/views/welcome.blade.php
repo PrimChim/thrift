@@ -18,6 +18,12 @@
             <a href="/product/{{ $product->id }}" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg w-full text-center block">View Product</a>
             <!-- Button (optional) for adding to cart or more actions -->
             <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg w-full">Add to Cart</button>
+            <form action="{{ route('buy.now', $product->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg w-full">
+                    Buy Now
+                </button>
+            </form>
         </div>
         @endforeach
     </div>
