@@ -22,7 +22,17 @@
             <div class="flex items-center gap-4">
                 <input type="text" placeholder="Search products" class="border text-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300">
                 <button class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Search</button>
+                @guest
                 <a href="/login" class="text-orange-500 bg-white border border-white hover:bg-orange-300 hover:border-orange-300 hover:text-white rounded-lg px-4 py-2">Login</a>
+                @else
+                <a href="/profile" class="hover:cursor-pointer">
+                    Welcome, <span class="underline text-orange-500"> {{Auth::user()->name}}</span>
+                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-red-400 hover:text-red-300">Logout?</button>
+                </form>
+                @endguest
                 <a href="/register" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Cart</a>
             </div>
         </div>

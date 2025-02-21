@@ -34,4 +34,23 @@ class OrderController extends Controller
     {
         return view('orders.success', compact('order'));
     }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->get();
+        return view('orders.index', ['orders'=>$orders]);
+    }
+
+    public function show(Order $order)
+    {
+        return view('orders.show', compact('order'));
+    }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Order deleted successfully!');
+    }
 }
