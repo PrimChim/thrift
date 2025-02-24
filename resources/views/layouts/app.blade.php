@@ -36,7 +36,11 @@
                 @guest
                 <a href="/register" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Register</a>
                 @else
+                @if(Auth::user()->role === 'admin')
+                <a href="/dashboard" class="ml-4 text-green-500 bg-white border border-green-500 hover:bg-green-500 hover:text-white rounded-lg px-4 py-2">Admin Panel</a>
+                @else
                 <a href="/cart" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Cart</a>
+                @endif
                 @endguest
             </div>
         </div>
