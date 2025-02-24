@@ -11,6 +11,37 @@
     </a>
 </div>
 
+<!-- Search and Filter Section -->
+<div class="mb-6 p-4 bg-gray-50 rounded-lg">
+    <form action="{{ route('products.index') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1">
+            <label for="search" class="block text-gray-700 text-sm font-medium mb-1">Search</label>
+            <input type="text" name="search" id="search" value="{{ request('search') }}"
+                placeholder="Search by product name"
+                class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200">
+        </div>
+        <div class="w-full md:w-48">
+            <label for="category_id" class="block text-gray-700 text-sm font-medium mb-1">Filter by Category</label>
+            <select name="category_id" id="category_id" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200">
+                <option value="">All categories</option>
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="flex items-end">
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                Apply Filters
+            </button>
+            @if(request('search') || request('role'))
+            <a href="{{ route('users.index') }}" class="ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+                Clear
+            </a>
+            @endif
+        </div>
+    </form>
+</div>
+
 @if (session('success'))
 <div class="mb-4 p-5 bg-green-300 text-white">
     {{ session('success') }}
@@ -56,5 +87,9 @@
             @endforelse
         </tbody>
     </table>
+    <div class="mt-4">
+        {{ $products->appends(request()->query())->links() }}
+    </div>
+
 </div>
 @endsection

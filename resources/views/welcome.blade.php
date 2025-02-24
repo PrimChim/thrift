@@ -23,7 +23,7 @@
             </form>
             <form action="{{ route('buy.now', $product->id) }}" method="POST">
                 @csrf
-                <button type="submit" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg w-full">
+                <button type="submit" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg w-full hover:cursor-pointer">
                     Buy Now
                 </button>
             </form>

@@ -13,9 +13,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the products.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Products::all();
+        // Get search and filter inputs
+        $search = $request->input('search');
+        $categoryId = $request->input('category_id');
+
+        // Query products
+        $query = Products::query();
+
+        // Search by name
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Filter by category
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+
+        // Paginate the results
+        $products = $query->paginate(10);
+
         return view('products.index', compact('products'));
     }
 
@@ -137,5 +156,18 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+
+        // Search products by name (you can expand with more conditions)
+        $products = Products::where('name', 'LIKE', "%{$query}%")->paginate(10);
+
+        // Fetch categories to maintain layout
+        $categories = Category::all();
+
+        return view('search-results', compact('products', 'query', 'categories'));
     }
 }

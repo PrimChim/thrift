@@ -35,6 +35,8 @@
             <a href="{{ route('dashboard') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">🏠 Dashboard</a>
             <a href="{{ route('products.index') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">📦 Inventory</a>
             <a href="{{ route('categories.index') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">✅ Categories</a>
+            <a href="{{ route('admin.orders.index') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">🛍️ Orders</a>
+            <a href="{{ route('users.index') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">👥 Users</a>
             <a href="{{ route('admin.profile') }}" class="block py-2 px-3 hover:bg-gray-700 rounded">👤 Profile</a>
         </nav>
     </aside>

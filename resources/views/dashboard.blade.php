@@ -37,13 +37,13 @@
     <!-- This Week's Revenue -->
     <div class="bg-green-500 text-white p-6 rounded-lg shadow-md">
         <h5 class="text-lg font-semibold">This Week’s Revenue</h5>
-        <p class="text-2xl font-bold mt-2">$0.00</p>
+        <p class="text-2xl font-bold mt-2">Rs. 0.00</p>
     </div>
 
     <!-- This Month's Revenue -->
     <div class="bg-cyan-500 text-white p-6 rounded-lg shadow-md">
         <h5 class="text-lg font-semibold">This Month’s Revenue</h5>
-        <p class="text-2xl font-bold mt-2">$0.00</p>
+        <p class="text-2xl font-bold mt-2">Rs. 0.00</p>
     </div>
 </div>
 @endsection

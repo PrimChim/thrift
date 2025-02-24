@@ -9,9 +9,9 @@
         <!-- Product Image -->
         <div class="w-full md:w-1/2 mb-6 md:mb-0">
             @if($product->image_url)
-                <img src="{{ Storage::url($product->image_url) }}" alt="{{ $product->name }}" class="w-full h-auto object-cover rounded-md shadow-md">
+            <img src="{{ Storage::url($product->image_url) }}" alt="{{ $product->name }}" class="w-full h-auto object-cover rounded-md shadow-md">
             @else
-                <img src="https://via.placeholder.com/400" alt="No Image Available" class="w-full h-auto object-cover rounded-md shadow-md">
+            <img src="https://via.placeholder.com/400" alt="No Image Available" class="w-full h-auto object-cover rounded-md shadow-md">
             @endif
         </div>
 
@@ -25,9 +25,12 @@
             <div class="flex items-center justify-between">
                 <!-- Add to Cart / Buy Now Button -->
 
-                    <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <form action="{{ route('buy.now', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg w-full hover:cursor-pointer">
                         Buy Now
                     </button>
+                </form>
 
 
                 <!-- Quantity -->

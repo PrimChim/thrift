@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-@section('title', $category->name . ' - Thrift Store')
+@section('title', 'Search Results')
 
 @section('content')
-<h2 class="text-2xl font-bold mb-6">{{ $category->name }}</h2>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<h1 class="text-2xl font-bold mb-4">Search Results for "{{ $query }}"</h1>
+
+@if($products->count() > 0)
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     @foreach($products as $product)
     <div class="bg-white rounded-lg shadow p-4">
         <!-- Link to product page -->
@@ -28,4 +30,10 @@
     </div>
     @endforeach
 </div>
+<div class="mt-6">
+    {{ $products->appends(['search' => $query])->links() }}
+</div>
+@else
+<p class="text-gray-600">No products found.</p>
+@endif
 @endsection
