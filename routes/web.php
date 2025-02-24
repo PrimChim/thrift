@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\users\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -38,8 +39,14 @@ Route::get('/search', [ProductController::class, 'search'])->name('search.produc
 // Protect routes that require authentication
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('orders', OrderController::class);
+    Route::resource('order', OrderController::class);
     Route::get('/profile', [ProfileController::class, 'profile'])->name('user.profile');
+    Route::put('/profile/update', [UserController::class, 'update'])->name('user.profile.update');
+
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
 
     // Routes for cart
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

@@ -3,10 +3,22 @@
 @section('title', 'Carts - Nidhi')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-6">Shopping Cart</h1>
+<div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 flex flex-col space-y-4">
+        <a class="text-blue-400 hover:text-blue-300 {{ request()->routeIs('user.profile') ? 'font-bold text-blue-600' : '' }}"
+            href="{{ route('user.profile') }}">Manage My Profile</a>
+        <a class="text-blue-400 hover:text-blue-300 {{ request()->routeIs('order.index') ? 'font-bold text-blue-600' : '' }}"
+            href="{{ route('order.index') }}">My Orders</a>
+        <a class="text-blue-400 hover:text-blue-300 {{ request()->routeIs('cart.index') ? 'font-bold text-blue-600' : '' }}"
+            href="{{ route('cart.index') }}">My Cart</a>
+    </aside>
 
-    @if($cartItems->count() > 0)
+    <!-- Main Content -->
+    <main class="flex-1 px-6 py-8">
+        <h1 class="text-2xl font-bold mb-6 text-blue-300">Shopping Cart</h1>
+
+        @if($cartItems->count() > 0)
         <div class="bg-white rounded-lg shadow overflow-hidden">
             <table class="w-full">
                 <thead class="bg-gray-50">
@@ -34,8 +46,7 @@
                             <form action="{{ route('cart.update', $item) }}" method="POST" class="flex items-center">
                                 @csrf
                                 @method('PUT')
-                                <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" 
-                                    class="w-20 rounded border-gray-300">
+                                <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="w-20 rounded border-gray-300">
                                 <button type="submit" class="ml-2 text-sm text-blue-600 hover:text-blue-800">Update</button>
                             </form>
                         </td>
@@ -55,17 +66,18 @@
             <div class="px-6 py-4 bg-gray-50">
                 <div class="text-right">
                     <div class="text-lg font-semibold">Total: Rs. {{ number_format($total, 2) }}</div>
-                    <a href="" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    <a href="{{ route('checkout.index') }}" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                         Proceed to Checkout
                     </a>
                 </div>
             </div>
         </div>
-    @else
+        @else
         <div class="text-center py-8">
             <p class="text-gray-500 mb-4">Your cart is empty</p>
             <a href="{{ route('products.index') }}" class="text-blue-600 hover:text-blue-800">Continue Shopping</a>
         </div>
-    @endif
+        @endif
+    </main>
 </div>
 @endsection
