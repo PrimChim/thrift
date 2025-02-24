@@ -50,7 +50,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric|min:0',
                 'quantity' => 'required|integer|min:0',
                 'category_id' => 'required|exists:categories,id', // Ensures category exists
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             ]);
 
             // Handle image upload
@@ -108,7 +108,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'category_id' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {

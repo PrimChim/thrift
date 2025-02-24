@@ -33,7 +33,11 @@
                     <button type="submit" class="text-red-400 hover:text-red-300">Logout?</button>
                 </form>
                 @endguest
-                <a href="/register" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Cart</a>
+                @guest
+                <a href="/register" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Register</a>
+                @else
+                <a href="/cart" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-orange-500">Cart</a>
+                @endguest
             </div>
         </div>
     </header>

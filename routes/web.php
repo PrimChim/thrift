@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\users\ProfileController;
+use App\Http\Controllers\CartController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -32,9 +33,15 @@ Route::get('/order-success/{order}', [OrderController::class, 'orderSuccess'])->
 
 // Protect routes that require authentication
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::resource('orders', OrderController::class);
     Route::get('/profile', [ProfileController::class, 'profile'])->name('user.profile');
+
+    // Routes for cart
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
+    Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
 
     // admin access only
     Route::middleware(['role:admin'])->group(function () {

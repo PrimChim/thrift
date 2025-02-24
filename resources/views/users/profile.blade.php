@@ -7,6 +7,7 @@
     <aside class="w-64 flex flex-col space-y-4">
         <a class="text-blue-400 hover:text-blue-300" href="">Manage My Profile</a>
         <a class="text-blue-400 hover:text-blue-300" href="{{route('orders.index')}}">My Orders</a>
+        <a class="text-blue-400 hover:text-blue-300" href="{{route('cart.index')}}">My Cart</a>
     </aside>
     <main>
         <h1 class="text-2xl font-bold text-blue-300">
